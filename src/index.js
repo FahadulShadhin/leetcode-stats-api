@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('./config/logger');
+const logger = require('./utils/logger');
 const getUserData = require('./controllers/index');
 
 const app = express();

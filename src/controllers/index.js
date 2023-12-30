@@ -1,5 +1,6 @@
-const logger = require('../config/logger');
+const logger = require('../utils/logger');
 const LeetCodeGraphQLClient = require('../services/LeetCodeService');
+const constructUserData = require('../utils/constructUserData');
 
 const getUserData = async (req, res) => {
 	const { leetCodeUsername } = req.params;
@@ -10,20 +11,34 @@ const getUserData = async (req, res) => {
 			leetCodeUsername
 		);
 		const languageStatsResponse = await client.languageStats(leetCodeUsername);
+		const rankResponse = await client.getRankAndRealname(leetCodeUsername);
 
-		const data = {
-			userProblemsSolvedData: userProblemsSolvedResponse.data.data,
-			languageStatsData: languageStatsResponse.data.data,
-		};
+		const userData = constructUserData(
+			userProblemsSolvedResponse.data.data,
+			languageStatsResponse.data.data,
+			rankResponse.data.data
+		);
+
+		if (!userData) {
+			logger.info(`${leetCodeUsername} doesn't exist!`);
+			return res.status(404).json({
+				message: 'not found',
+				username: leetCodeUsername,
+			});
+		}
 
 		logger.info('Successfully retrieved user info...');
-		res.status(200).json({
-			message: 'Success',
-			data: data,
+		return res.status(200).json({
+			message: 'success',
+			username: leetCodeUsername,
+			data: userData,
 		});
 	} catch (error) {
 		logger.error(error);
-		res.status(500).json({ error: 'Internal Server Error' });
+		return res.status(500).json({
+			message: 'error',
+			error: 'Internal Server Error',
+		});
 	}
 };
 

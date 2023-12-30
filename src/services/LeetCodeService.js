@@ -55,6 +55,24 @@ class LeetCodeGraphQLClient {
 			username: leetcodeUsername,
 		});
 	}
+
+	async getRankAndRealname(leetcodeUsername) {
+		const query = `
+      query userPublicProfile($username: String!) {
+        matchedUser(username: $username) {
+          profile {
+            ranking
+            userAvatar
+            realName
+          }
+        }
+      }  
+    `;
+
+		return await this.sendGraphQLRequest(query, {
+			username: leetcodeUsername,
+		});
+	}
 }
 
 module.exports = LeetCodeGraphQLClient;
