@@ -39,7 +39,7 @@ class LeetCodeGraphQLClient {
 		});
 	}
 
-	async languageStats(leetcodeUsername) {
+	async languageStatsQuery(leetcodeUsername) {
 		const query = `
       query languageStats($username: String!) {
         matchedUser(username: $username) {
@@ -56,7 +56,7 @@ class LeetCodeGraphQLClient {
 		});
 	}
 
-	async getRankAndRealname(leetcodeUsername) {
+	async userPublicProfileQuery(leetcodeUsername) {
 		const query = `
       query userPublicProfile($username: String!) {
         matchedUser(username: $username) {
@@ -67,6 +67,27 @@ class LeetCodeGraphQLClient {
           }
         }
       }  
+    `;
+
+		return await this.sendGraphQLRequest(query, {
+			username: leetcodeUsername,
+		});
+	}
+
+	async userContestRankingQuery(leetcodeUsername) {
+		const query = `
+      query userContestRankingInfo($username: String!) {
+        userContestRanking(username: $username) {
+          attendedContestsCount
+          rating
+          globalRanking
+          totalParticipants
+          topPercentage
+          badge {
+            name
+          }
+        }
+      }
     `;
 
 		return await this.sendGraphQLRequest(query, {

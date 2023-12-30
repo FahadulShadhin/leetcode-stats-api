@@ -10,13 +10,19 @@ const getUserData = async (req, res) => {
 		const userProblemsSolvedResponse = await client.userProblemsSolvedQuery(
 			leetCodeUsername
 		);
-		const languageStatsResponse = await client.languageStats(leetCodeUsername);
-		const rankResponse = await client.getRankAndRealname(leetCodeUsername);
+		const languageStatsResponse = await client.languageStatsQuery(
+			leetCodeUsername
+		);
+		const rankResponse = await client.userPublicProfileQuery(leetCodeUsername);
+		const contestRankingResponse = await client.userContestRankingQuery(
+			leetCodeUsername
+		);
 
 		const userData = constructUserData(
 			userProblemsSolvedResponse.data.data,
 			languageStatsResponse.data.data,
-			rankResponse.data.data
+			rankResponse.data.data,
+			contestRankingResponse.data.data
 		);
 
 		if (!userData) {

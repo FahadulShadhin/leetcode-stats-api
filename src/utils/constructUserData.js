@@ -1,7 +1,8 @@
 const constructUserData = (
 	userProblemsSolvedData,
 	languageStatsData,
-	rankData
+	rankData,
+	contestRankingData
 ) => {
 	if (
 		!userProblemsSolvedData.matchedUser ||
@@ -46,6 +47,7 @@ const constructUserData = (
 				userProblemsSolvedData.matchedUser.problemsSolvedBeatsStats[0]
 					.percentage,
 		},
+		contestRanking: contestRankingData.userContestRanking,
 		languageStats: languageStatsData.matchedUser.languageProblemCount,
 	};
 
