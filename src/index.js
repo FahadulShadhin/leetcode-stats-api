@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const logger = require('./config/logger');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,13 +34,14 @@ app.get('/:leetcodeUsername', async (req, res) => {
 		});
 
 		const data = response.data.data;
+		logger.info('Success!');
 		res.json(data);
 	} catch (error) {
-		console.error(error);
+		logger.error(error);
 		res.status(500).json({ error: 'Internal Server Error' });
 	}
 });
 
 app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+	logger.info(`Server is running on http://localhost:${PORT}`);
 });
