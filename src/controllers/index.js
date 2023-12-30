@@ -1,7 +1,7 @@
 const logger = require('../config/logger');
 const LeetCodeGraphQLClient = require('../services/LeetCodeService');
 
-const getUserStatus = async (req, res) => {
+const getUserData = async (req, res) => {
 	const { leetCodeUsername } = req.params;
 	const client = new LeetCodeGraphQLClient();
 
@@ -16,6 +16,7 @@ const getUserStatus = async (req, res) => {
 			languageStatsData: languageStatsResponse.data.data,
 		};
 
+		logger.info('Successfully retrieved user info...');
 		res.status(200).json({
 			message: 'Success',
 			data: data,
@@ -26,4 +27,4 @@ const getUserStatus = async (req, res) => {
 	}
 };
 
-module.exports = getUserStatus;
+module.exports = getUserData;
