@@ -28,22 +28,22 @@ const getUserData = async (req, res) => {
 		if (!userData) {
 			logger.info(`${leetCodeUsername} doesn't exist!`);
 			return res.status(404).json({
-				message: 'not found',
-				username: leetCodeUsername,
+				status: 'not found',
+				message: `${leetCodeUsername} doesn't exist.`,
 			});
 		}
 
 		logger.info('Successfully retrieved user info...');
 		return res.status(200).json({
-			message: 'success',
-			username: leetCodeUsername,
+			status: 'success',
+			message: `${leetCodeUsername} found!`,
 			data: userData,
 		});
 	} catch (error) {
 		logger.error(error);
 		return res.status(500).json({
-			message: 'error',
-			error: 'Internal Server Error',
+			status: 'error',
+			message: 'Internal Server Error',
 		});
 	}
 };
