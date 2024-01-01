@@ -1,8 +1,10 @@
 const axios = require('axios');
+const Config = require('../utils/config');
 
 class LeetCodeGraphQLClient {
 	constructor() {
-		this.graphqlEndpoint = 'https://leetcode.com/graphql';
+		this.variables = Config.variables();
+		this.graphqlEndpoint = this.variables.leetcodeGraphqlEndpoint;
 	}
 
 	async sendGraphQLRequest(query, variables) {

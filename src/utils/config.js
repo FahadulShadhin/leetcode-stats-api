@@ -1,3 +1,4 @@
+require('dotenv').config();
 const winston = require('winston');
 
 class Config {
@@ -10,14 +11,15 @@ class Config {
 			],
 		});
 	}
-}
 
-// const logger = winston.createLogger({
-// 	level: 'info',
-// 	format: winston.format.json(),
-// 	transports: [
-// 		new winston.transports.Console({ format: winston.format.simple() }),
-// 	],
-// });
+	static variables() {
+		const leetcodeGraphqlEndpoint = process.env.LEETCODE_GRAPHQL_ENDPOINT;
+		const port = process.env.PORT;
+		return {
+			leetcodeGraphqlEndpoint,
+			port,
+		};
+	}
+}
 
 module.exports = Config;
