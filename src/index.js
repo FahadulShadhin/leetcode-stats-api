@@ -1,9 +1,8 @@
 const express = require('express');
 const Config = require('./utils/config');
 const getUserData = require('./controllers/index');
-const connectDB = require('./utils/db');
 
-connectDB();
+Config.connectDB();
 const app = express();
 const logger = Config.logger();
 const variables = Config.variables();

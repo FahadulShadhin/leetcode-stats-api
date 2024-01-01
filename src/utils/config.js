@@ -1,5 +1,6 @@
 require('dotenv').config();
 const winston = require('winston');
+const mongoose = require('mongoose');
 
 class Config {
 	static logger() {
@@ -15,12 +16,31 @@ class Config {
 	static variables() {
 		const leetcodeGraphqlEndpoint = process.env.LEETCODE_GRAPHQL_ENDPOINT;
 		const port = process.env.PORT;
-		const mongoUri = process.env.MONGO_URI;
+		const mongoUrl = process.env.MONGO_URL;
+		const db = process.env.DB;
 		return {
 			leetcodeGraphqlEndpoint,
 			port,
-			mongoUri,
+			mongoUrl,
+			db,
 		};
+	}
+
+	static async connectDB() {
+		const variables = Config.variables();
+		const logger = Config.logger();
+
+		try {
+			const conn = await mongoose.connect(
+				`${variables.mongoUrl}/${variables.db}`
+			);
+			logger.info(
+				`MongoDB connected: ${conn.connection.host} | database: ${conn.connection.name}`
+			);
+		} catch (error) {
+			logger.error(`Error: ${error.message}`);
+			process.exit();
+		}
 	}
 }
 
