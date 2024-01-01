@@ -15,9 +15,11 @@ class Config {
 	static variables() {
 		const leetcodeGraphqlEndpoint = process.env.LEETCODE_GRAPHQL_ENDPOINT;
 		const port = process.env.PORT;
+		const mongoUri = process.env.MONGO_URI;
 		return {
 			leetcodeGraphqlEndpoint,
 			port,
+			mongoUri,
 		};
 	}
 }
