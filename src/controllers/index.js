@@ -1,10 +1,11 @@
-const logger = require('../utils/logger');
+const Config = require('../utils/config');
 const LeetCodeGraphQLClient = require('../services/LeetCodeService');
 const constructUserData = require('../utils/constructUserData');
 
 const getUserData = async (req, res) => {
 	const { leetCodeUsername } = req.params;
 	const client = new LeetCodeGraphQLClient();
+	const logger = Config.logger();
 
 	try {
 		const userProblemsSolvedResponse = await client.userProblemsSolvedQuery(

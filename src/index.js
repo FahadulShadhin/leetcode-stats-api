@@ -1,9 +1,10 @@
 const express = require('express');
-const logger = require('./utils/logger');
+const Config = require('./utils/config');
 const getUserData = require('./controllers/index');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const logger = Config.logger();
 
 app.use('/:leetCodeUsername', getUserData);
 
