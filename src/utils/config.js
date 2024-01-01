@@ -15,8 +15,8 @@ class Config {
 
 	static variables() {
 		const leetcodeGraphqlEndpoint = process.env.LEETCODE_GRAPHQL_ENDPOINT;
-		const port = process.env.PORT;
-		const mongoUrl = process.env.MONGO_URL;
+		const port = process.env.PORT || 3000;
+		const mongoUrl = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017';
 		const db = process.env.DB;
 		return {
 			leetcodeGraphqlEndpoint,
