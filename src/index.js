@@ -6,7 +6,7 @@ Config.connectDB();
 const app = express();
 const logger = Config.logger();
 const variables = Config.variables();
-const PORT = variables.port || 3000;
+const PORT = variables.port;
 
 app.get('/', (req, res) => {
 	return res.status(200).json({
