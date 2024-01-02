@@ -38,13 +38,7 @@ const getUserData = async (req, res) => {
 		}
 
 		logger.info('Successfully retrieved user info...');
-
-		try {
-			const saveStats = await statsService.saveUserStats();
-			logger.info('Stats saved successfully.');
-		} catch (error) {
-			logger.error('Problem while saving stats.');
-		}
+		await statsService.saveUserStats();
 
 		return res.status(200).json({
 			status: 'success',

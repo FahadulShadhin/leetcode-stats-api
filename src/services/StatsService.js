@@ -1,4 +1,5 @@
 const Stats = require('../models/statsModel');
+const Config = require('../config');
 
 class StatsService {
 	constructor(
@@ -13,6 +14,7 @@ class StatsService {
 		this.languageStatsData = languageStatsData;
 		this.rankData = rankData;
 		this.contestRankingData = contestRankingData;
+		this.logger = Config.logger();
 	}
 
 	constructUserData() {
@@ -67,12 +69,15 @@ class StatsService {
 	}
 
 	async saveUserStats() {
-		if (
-			!this.userProblemsSolvedData.matchedUser ||
-			!this.languageStatsData.matchedUser ||
-			!this.rankData.matchedUser
-		) {
-			return null;
+		const userStatsExists = await Stats.findOne({
+			username: this.leetCodeUsername,
+		});
+
+		if (userStatsExists) {
+			this.logger.info(
+				`Stats for ${this.leetCodeUsername} already exists in db.`
+			);
+			return;
 		}
 
 		const newStats = new Stats({
@@ -115,7 +120,12 @@ class StatsService {
 			languageStats: this.languageStatsData.matchedUser.languageProblemCount,
 		});
 
-		return await newStats.save();
+		try {
+			await newStats.save();
+			this.logger.info('Stats saved successfully to db.');
+		} catch (error) {
+			this.logger.error('Problem while saving stats to db.');
+		}
 	}
 }
 
