@@ -1,6 +1,7 @@
 const Config = require('../utils/config');
 const LeetCodeGraphQLClient = require('../services/LeetCodeService');
 const constructUserData = require('../utils/constructUserData');
+const saveUserStats = require('../utils/saveUserStats');
 
 const getUserData = async (req, res) => {
 	const { leetCodeUsername } = req.params;
@@ -35,6 +36,20 @@ const getUserData = async (req, res) => {
 		}
 
 		logger.info('Successfully retrieved user info...');
+
+		try {
+			const saveStats = await saveUserStats(
+				leetCodeUsername,
+				userProblemsSolvedResponse.data.data,
+				languageStatsResponse.data.data,
+				rankResponse.data.data,
+				contestRankingResponse.data.data
+			);
+			logger.info('Stats saved successfully.');
+		} catch (error) {
+			logger.error('Problem while saving stats.');
+		}
+
 		return res.status(200).json({
 			status: 'success',
 			message: `${leetCodeUsername} found!`,

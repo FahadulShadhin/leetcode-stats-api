@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const statsSchema = new mongoose.Schema(
 	{
+		username: String,
 		name: String,
 		rank: Number,
 		avatar: String,
@@ -22,12 +23,8 @@ const statsSchema = new mongoose.Schema(
 			solved: Number,
 			beatsPercentage: Number,
 		},
-		languageStats: [
-			{
-				languageName: String,
-				problemsSolved: Number,
-			},
-		],
+		contestRanking: [],
+		languageStats: [],
 	},
 	{
 		timestamps: true,
