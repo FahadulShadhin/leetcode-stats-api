@@ -37,7 +37,7 @@ const getUserData = async (req, res) => {
 			});
 		}
 
-		logger.info('Successfully retrieved user info...');
+		logger.info('Successfully retrieved user stats...');
 		await statsService.saveUserStats();
 
 		return res.status(200).json({
