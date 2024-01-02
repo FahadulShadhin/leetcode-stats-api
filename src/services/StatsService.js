@@ -124,7 +124,7 @@ class StatsService {
 			await newStats.save();
 			this.logger.info('Stats saved successfully to db.');
 		} catch (error) {
-			this.logger.error('Problem while saving stats to db.');
+			this.logger.error(error.message);
 		}
 	}
 }
