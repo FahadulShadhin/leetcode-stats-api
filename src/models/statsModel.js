@@ -23,7 +23,7 @@ const statsSchema = new mongoose.Schema(
 			solved: Number,
 			beatsPercentage: Number,
 		},
-		contestRanking: [],
+		contestRanking: {},
 		languageStats: [],
 	},
 	{
