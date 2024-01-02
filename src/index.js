@@ -1,5 +1,5 @@
 const express = require('express');
-const Config = require('./utils/config');
+const Config = require('./config');
 const getUserData = require('./controllers/index');
 
 Config.connectDB();

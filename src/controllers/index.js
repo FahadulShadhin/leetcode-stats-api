@@ -1,7 +1,6 @@
-const Config = require('../utils/config');
+const Config = require('../config');
 const LeetCodeGraphQLClient = require('../services/LeetCodeService');
-const constructUserData = require('../utils/constructUserData');
-const saveUserStats = require('../utils/saveUserStats');
+const StatsService = require('../services/StatsService');
 
 const getUserData = async (req, res) => {
 	const { leetCodeUsername } = req.params;
@@ -20,12 +19,15 @@ const getUserData = async (req, res) => {
 			leetCodeUsername
 		);
 
-		const userData = constructUserData(
+		const statsService = new StatsService(
+			leetCodeUsername,
 			userProblemsSolvedResponse.data.data,
 			languageStatsResponse.data.data,
 			rankResponse.data.data,
 			contestRankingResponse.data.data
 		);
+
+		const userData = statsService.constructUserData();
 
 		if (!userData) {
 			logger.info(`${leetCodeUsername} doesn't exist!`);
@@ -38,13 +40,7 @@ const getUserData = async (req, res) => {
 		logger.info('Successfully retrieved user info...');
 
 		try {
-			const saveStats = await saveUserStats(
-				leetCodeUsername,
-				userProblemsSolvedResponse.data.data,
-				languageStatsResponse.data.data,
-				rankResponse.data.data,
-				contestRankingResponse.data.data
-			);
+			const saveStats = await statsService.saveUserStats();
 			logger.info('Stats saved successfully.');
 		} catch (error) {
 			logger.error('Problem while saving stats.');
@@ -56,7 +52,7 @@ const getUserData = async (req, res) => {
 			data: userData,
 		});
 	} catch (error) {
-		logger.error(error);
+		logger.error(error.message);
 		return res.status(500).json({
 			status: 'error',
 			message: 'Internal Server Error',

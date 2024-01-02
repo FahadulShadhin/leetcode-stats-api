@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Config = require('../utils/config');
+const Config = require('../config');
 
 class LeetCodeGraphQLClient {
 	constructor() {
