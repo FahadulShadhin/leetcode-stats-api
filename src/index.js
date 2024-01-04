@@ -18,5 +18,5 @@ app.get('/', (req, res) => {
 app.use('/:leetCodeUsername', getUserData);
 
 app.listen(PORT, () => {
-	logger.info(`Server is running on http://localhost:${PORT}`);
+	logger.info(`Server is running on port: ${PORT}`);
 });
