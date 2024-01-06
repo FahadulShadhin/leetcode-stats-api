@@ -22,7 +22,6 @@ class Config {
 			leetcodeGraphqlEndpoint,
 			port,
 			mongoUrl,
-			db,
 		};
 	}
 
@@ -31,9 +30,7 @@ class Config {
 		const logger = Config.logger();
 
 		try {
-			const conn = await mongoose.connect(
-				`${variables.mongoUrl}/${variables.db}`
-			);
+			const conn = await mongoose.connect(`${variables.mongoUrl}`);
 			logger.info(
 				`MongoDB connected: ${conn.connection.host} | database: ${conn.connection.name}`
 			);
