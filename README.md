@@ -29,7 +29,7 @@ PORT=3000
 - Endpoint: http://localhost:3000/shadhin17
 - Response:
 
-```
+```json
 {
 	"status": "success",
 	"message": "shadhin17 found!",
