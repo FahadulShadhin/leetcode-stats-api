@@ -52,6 +52,6 @@ PORT=3000
 			{ "languageName": "Python3", "problemsSolved": 160 },
 			{ "languageName": "TypeScript", "problemsSolved": 1 }
 		]
-	}
+	} 
 }
 ```
