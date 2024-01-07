@@ -4,7 +4,8 @@ API to grab your LeetCode profile stats
 
 ## Setup:
 
-- Built with node==18.18.2 & yarn==1.22.21
+- `node --version` : `v18.18.2`
+- `yarn --version` : `1.22.21`
 - Clone the repository
 - cd to root
 - Install the dependencies: `yarn install`
