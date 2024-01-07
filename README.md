@@ -14,7 +14,7 @@ API to grab your LeetCode profile stats
 LEETCODE_GRAPHQL_ENDPOINT=https://leetcode.com/graphql
 MONGO_URI=<your_mongodb_connection_string>
 DB_NAME=<your_database_name>
-PORT=3000
+PORT=8000
 ```
 
 - Start the server: `yarn dev`
@@ -27,7 +27,7 @@ PORT=3000
 
 ## Example:
 
-- Endpoint: http://localhost:3000/shadhin17
+- Endpoint: http://localhost:8000/shadhin17
 - Response:
 
 ```json
