@@ -28,7 +28,7 @@ PORT=8000
 
 ## Example:
 
-- Endpoint: http://localhost:8000/shadhin17
+- Request: http://localhost:8000/shadhin17
 - Response:
 
 ```json
