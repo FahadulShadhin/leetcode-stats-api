@@ -16,13 +16,13 @@ class Config {
 	static variables() {
 		const leetcodeGraphqlEndpoint = process.env.LEETCODE_GRAPHQL_ENDPOINT;
 		const port = process.env.PORT || 3000;
-		const mongoUrl = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017';
-		const db = process.env.DB || 'leetcode-stats';
+		const mongoUri = process.env.MONGO_URI || 'mongodb://0.0.0.0:27017';
+		const dbName = process.env.DB_NAME || 'leetcode-stats';
 		return {
 			leetcodeGraphqlEndpoint,
 			port,
-			mongoUrl,
-			db,
+			mongoUri,
+			dbName,
 		};
 	}
 
@@ -32,7 +32,7 @@ class Config {
 
 		try {
 			const conn = await mongoose.connect(
-				`${variables.mongoUrl}/${variables.db}`
+				`${variables.mongoUri}/${variables.dbName}`
 			);
 			logger.info(
 				`MongoDB connected: ${conn.connection.host} | database: ${conn.connection.name}`
