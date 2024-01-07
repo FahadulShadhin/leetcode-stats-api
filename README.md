@@ -12,7 +12,8 @@ API to grab your LeetCode profile stats
 
 ```
 LEETCODE_GRAPHQL_ENDPOINT=https://leetcode.com/graphql
-MONGO_URL=<your_mongodb_connection_string>
+MONGO_URI=<your_mongodb_connection_string>
+DB_NAME=<your_database_name>
 PORT=3000
 ```
 
@@ -52,6 +53,6 @@ PORT=3000
 			{ "languageName": "Python3", "problemsSolved": 160 },
 			{ "languageName": "TypeScript", "problemsSolved": 1 }
 		]
-	} 
+	}
 }
 ```
